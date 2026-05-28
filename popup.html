@@ -12,14 +12,12 @@
       }
 
       body {
-        width: 340px;
-        min-height: 160px;
+        width: 320px;
+        min-height: 120px;
         background: #0f0f0f;
         color: white;
         font-family: system-ui, -apple-system, sans-serif;
       }
-
-      /* ── Header ─────────────────────────────────────────────────── */
 
       header {
         background: linear-gradient(135deg, #6c47ff, #a855f7);
@@ -29,7 +27,6 @@
       header h1 {
         font-size: 15px;
         font-weight: 700;
-        letter-spacing: -0.01em;
       }
 
       #page-label {
@@ -41,16 +38,12 @@
         white-space: nowrap;
       }
 
-      /* ── Body ───────────────────────────────────────────────────── */
-
       #main-body {
         padding: 12px;
         display: flex;
         flex-direction: column;
         gap: 8px;
       }
-
-      /* ── Empty state ─────────────────────────────────────────────── */
 
       #empty-msg {
         display: none;
@@ -59,8 +52,6 @@
         font-size: 13px;
         padding: 24px 16px;
       }
-
-      /* ── Bookmark cards ──────────────────────────────────────────── */
 
       #bookmark-list {
         display: flex;
@@ -74,10 +65,10 @@
         border-radius: 12px;
         padding: 11px 12px;
         cursor: pointer;
-        transition: border-color 0.2s, background 0.2s;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         gap: 10px;
+        transition: border-color 0.2s, background 0.2s;
       }
 
       .bm-card:hover {
@@ -85,34 +76,14 @@
         background: #1e1a2e;
       }
 
-      .bm-card-body {
-        flex: 1;
-        min-width: 0;
-      }
-
       .bm-name {
+        flex: 1;
         font-size: 13px;
         font-weight: 600;
         color: #e0d7ff;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-      }
-
-      .bm-note {
-        font-size: 11px;
-        color: #777;
-        font-style: italic;
-        margin-top: 3px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      .bm-timestamp {
-        font-size: 10px;
-        color: #444;
-        margin-top: 4px;
       }
 
       .bm-delete {
@@ -124,43 +95,12 @@
         cursor: pointer;
         padding: 2px 4px;
         border-radius: 6px;
-        line-height: 1;
         transition: color 0.15s, background 0.15s;
       }
 
       .bm-delete:hover {
         color: white;
         background: #6c47ff;
-      }
-
-      /* ── Export bar ──────────────────────────────────────────────── */
-
-      #export-bar {
-        display: none;
-        padding: 10px 12px;
-        border-top: 1px solid #1e1e1e;
-        gap: 8px;
-      }
-
-      #export-bar.visible {
-        display: flex;
-      }
-
-      .export-btn {
-        flex: 1;
-        padding: 8px;
-        background: #1a1a1a;
-        border: 1px solid #2a2a2a;
-        border-radius: 8px;
-        color: #aaa;
-        font-size: 12px;
-        cursor: pointer;
-        transition: border-color 0.2s, color 0.2s;
-      }
-
-      .export-btn:hover {
-        border-color: #6c47ff;
-        color: white;
       }
     </style>
   </head>
@@ -173,11 +113,6 @@
     <div id="main-body">
       <div id="empty-msg">No bookmarks on this page yet.</div>
       <div id="bookmark-list"></div>
-    </div>
-
-    <div id="export-bar">
-      <button class="export-btn" id="export-json">⬇ Export JSON</button>
-      <button class="export-btn" id="export-copy">📋 Copy All</button>
     </div>
 
     <script src="popup.js"></script>

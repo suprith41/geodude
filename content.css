@@ -6,37 +6,34 @@
   top: 0;
   width: 300px;
   height: 100%;
+  background: #0f0f0f;
+  color: white;
+  font-family: system-ui, -apple-system, sans-serif;
   z-index: 999999;
   display: flex;
   flex-direction: column;
   transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  background: #0f0f0f;
-  color: white;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  transition: transform 0.3s ease;
 }
 
 #geodude-sidebar.open {
   transform: translateX(0);
 }
 
-/* ── Sidebar Header ───────────────────────────────────────────────────────── */
+/* ── Header ──────────────────────────────────────────────────────────────── */
 
-#geodude-sidebar .geodude-header {
+.geodude-header {
   padding: 16px;
   background: linear-gradient(135deg, #6c47ff, #a855f7);
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 15px;
   flex-shrink: 0;
 }
 
-#geodude-sidebar .geodude-header-title {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-#geodude-sidebar .geodude-close-btn {
+#geodude-close {
   background: transparent;
   border: none;
   color: white;
@@ -44,17 +41,17 @@
   cursor: pointer;
   line-height: 1;
   padding: 2px 4px;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: opacity 0.15s;
 }
 
-#geodude-sidebar .geodude-close-btn:hover {
+#geodude-close:hover {
   opacity: 1;
 }
 
-/* ── Bookmark List ────────────────────────────────────────────────────────── */
+/* ── List ────────────────────────────────────────────────────────────────── */
 
-#geodude-sidebar .geodude-list {
+.geodude-list {
   flex: 1;
   overflow-y: auto;
   padding: 12px;
@@ -63,7 +60,7 @@
   gap: 10px;
 }
 
-/* ── Bookmark Item ────────────────────────────────────────────────────────── */
+/* ── Bookmark Item ───────────────────────────────────────────────────────── */
 
 .geodude-item {
   background: #1a1a1a;
@@ -71,6 +68,9 @@
   border-radius: 12px;
   padding: 12px;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   transition: border-color 0.2s, background 0.2s;
 }
 
@@ -83,30 +83,24 @@
   font-size: 13px;
   font-weight: 600;
   color: #e0d7ff;
-  margin-bottom: 4px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 8px;
 }
 
-.geodude-item-note {
-  font-size: 11px;
-  color: #888;
-  margin-bottom: 8px;
-  font-style: italic;
-}
-
-.geodude-item-actions {
-  display: flex;
-  gap: 6px;
-  margin-top: 6px;
-}
+/* ── Action Button ───────────────────────────────────────────────────────── */
 
 .geodude-action-btn {
   background: #2a2a2a;
   border: none;
   color: #aaa;
   border-radius: 6px;
-  padding: 3px 8px;
-  font-size: 11px;
+  padding: 4px 8px;
+  font-size: 12px;
   cursor: pointer;
+  flex-shrink: 0;
   transition: background 0.15s, color 0.15s;
 }
 
@@ -115,7 +109,7 @@
   color: white;
 }
 
-/* ── Hover Bookmark Button ────────────────────────────────────────────────── */
+/* ── Hover Bookmark Button ───────────────────────────────────────────────── */
 
 .geodude-bookmark-btn {
   position: absolute;
@@ -131,80 +125,14 @@
   display: none;
   z-index: 9999;
   box-shadow: 0 2px 8px rgba(108, 71, 255, 0.4);
-  transition: opacity 0.2s;
 }
 
-/* ── Toggle Button ────────────────────────────────────────────────────────── */
-
-#geodude-toggle {
-  position: fixed;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  background: linear-gradient(135deg, #6c47ff, #a855f7);
-  color: white;
-  border: none;
-  border-radius: 12px 0 0 12px;
-  padding: 14px 8px;
-  cursor: pointer;
-  font-size: 18px;
-  z-index: 9999999;
-  box-shadow: -2px 0 12px rgba(108, 71, 255, 0.5);
-  writing-mode: vertical-rl;
-  transition: padding-right 0.2s;
-}
-
-#geodude-toggle:hover {
-  padding-right: 12px;
-}
-
-/* ── Export Bar ───────────────────────────────────────────────────────────── */
-
-#geodude-sidebar .geodude-export-bar {
-  padding: 10px 12px;
-  border-top: 1px solid #2a2a2a;
-  display: flex;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.geodude-export-btn {
-  flex: 1;
-  padding: 8px;
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  color: #aaa;
-  font-size: 12px;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.geodude-export-btn:hover {
-  border-color: #6c47ff;
-  color: white;
-}
-
-/* ── Empty State ──────────────────────────────────────────────────────────── */
+/* ── Empty State ─────────────────────────────────────────────────────────── */
 
 #geodude-empty {
   text-align: center;
   color: #555;
   font-size: 13px;
   margin-top: 40px;
-}
-
-/* ── Drag Over State ──────────────────────────────────────────────────────── */
-
-.geodude-drag-over {
-  border-color: #a855f7 !important;
-  background: #2a1a3e !important;
-}
-
-/* ── Scroll-to Highlight ──────────────────────────────────────────────────── */
-
-.geodude-highlight {
-  outline: 2px solid #6c47ff !important;
-  outline-offset: 4px;
-  border-radius: 6px;
+  line-height: 1.6;
 }
