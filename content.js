@@ -1,3 +1,20 @@
+// ─── Scroll Utility ───────────────────────────────────────────────────────────────────────
+
+function scrollToElement(elementId, retries = 10, delay = 300) {
+  const el = document.getElementById(elementId);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Double-check scroll after a short wait in case page shifted
+    setTimeout(() => {
+      const el2 = document.getElementById(elementId);
+      if (el2) el2.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 500);
+  } else if (retries > 0) {
+    // Element not in DOM yet, wait and retry
+    setTimeout(() => scrollToElement(elementId, retries - 1, delay), delay);
+  }
+}
+
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
 function getConversationId() {
@@ -145,11 +162,7 @@ async function renderSidebar() {
   sidebar.querySelectorAll(".geodude-item").forEach((item) => {
     item.addEventListener("click", (e) => {
       if (e.target.closest(".geodude-delete")) return;
-      const elementId = item.dataset.elementId;
-      const target = document.getElementById(elementId);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
+      scrollToElement(item.dataset.elementId);
     });
   });
 
@@ -205,10 +218,7 @@ chrome.runtime.onMessage.addListener((message) => {
   }
 
   if (message.action === "scrollTo") {
-    const el = document.getElementById(message.elementId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+    scrollToElement(message.elementId);
     const sidebar = document.getElementById("geodude-sidebar");
     if (sidebar) sidebar.classList.add("open");
   }

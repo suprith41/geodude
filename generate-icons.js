@@ -2,14 +2,18 @@ const { createCanvas } = require("canvas");
 const fs = require("fs");
 const path = require("path");
 
-const sizes = [16, 48, 128];
+const sizes = [
+  { size: 16,  fontSize: 10  },
+  { size: 48,  fontSize: 30  },
+  { size: 128, fontSize: 80  },
+];
 const outDir = path.join(__dirname, "icons");
 
 if (!fs.existsSync(outDir)) {
   fs.mkdirSync(outDir);
 }
 
-sizes.forEach((size) => {
+sizes.forEach(({ size, fontSize }) => {
   const canvas = createCanvas(size, size);
   const ctx = canvas.getContext("2d");
 
@@ -18,7 +22,6 @@ sizes.forEach((size) => {
   ctx.fillRect(0, 0, size, size);
 
   // Centered emoji
-  const fontSize = Math.floor(size * 0.6);
   ctx.font = `${fontSize}px serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
