@@ -1,0 +1,155 @@
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+
+#geodude-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 280px;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#geodude-sidebar.open {
+  transform: translateX(0);
+}
+
+/* ── Sidebar Header ───────────────────────────────────────────────────────── */
+
+#geodude-sidebar .geodude-header {
+  padding: 16px 12px;
+  background-color: #6c47ff;
+  color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+#geodude-sidebar .geodude-close-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 4px;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+#geodude-sidebar .geodude-close-btn:hover {
+  opacity: 1;
+}
+
+/* ── Bookmark List ────────────────────────────────────────────────────────── */
+
+#geodude-sidebar .geodude-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+#geodude-sidebar .geodude-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  background: #f3f0ff;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1a1a2e;
+  transition: background 0.15s, transform 0.1s;
+}
+
+#geodude-sidebar .geodude-item:hover {
+  background: #e0d7ff;
+  transform: translateX(-2px);
+}
+
+#geodude-sidebar .geodude-item-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+#geodude-sidebar .geodude-item-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#geodude-sidebar .geodude-empty {
+  color: #888;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 32px;
+  line-height: 1.6;
+}
+
+/* ── Hover Bookmark Button ────────────────────────────────────────────────── */
+
+.geodude-bookmark-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  z-index: 9999;
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+
+.geodude-bookmark-btn:hover {
+  transform: scale(1.2);
+}
+
+/* ── Toggle Button ────────────────────────────────────────────────────────── */
+
+#geodude-toggle {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #6c47ff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  padding: 10px 6px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 9999999;
+  writing-mode: vertical-rl;
+  transition: background 0.2s, padding-right 0.2s;
+  box-shadow: -2px 0 12px rgba(108, 71, 255, 0.35);
+}
+
+#geodude-toggle:hover {
+  background: #5533dd;
+  padding-right: 10px;
+}
+
+/* ── Scroll-to Highlight ──────────────────────────────────────────────────── */
+
+.geodude-highlight {
+  outline: 2px solid #6c47ff !important;
+  outline-offset: 4px;
+  border-radius: 6px;
+  transition: outline 0.3s ease;
+}

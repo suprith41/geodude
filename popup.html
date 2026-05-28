@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geodude Bookmarks</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        width: 320px;
+        min-height: 120px;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #ffffff;
+        padding: 16px;
+        color: #1a1a2e;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #f3f0ff;
+      }
+
+      header .icon {
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      header h1 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #6c47ff;
+        letter-spacing: -0.01em;
+      }
+
+      #empty-msg {
+        color: #999;
+        font-size: 13px;
+        text-align: center;
+        padding: 16px 0 8px;
+        line-height: 1.5;
+      }
+
+      #bookmark-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .bookmark-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        background: #f3f0ff;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s;
+        border: none;
+        width: 100%;
+        text-align: left;
+      }
+
+      .bookmark-item:hover {
+        background: #e0d7ff;
+      }
+
+      .bookmark-item .bm-icon {
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+
+      .bookmark-item .bm-name {
+        flex: 1;
+        font-size: 13px;
+        font-weight: 500;
+        color: #1a1a2e;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .bookmark-item .bm-delete {
+        flex-shrink: 0;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        opacity: 0.45;
+        padding: 2px;
+        border-radius: 4px;
+        transition: opacity 0.15s;
+        line-height: 1;
+      }
+
+      .bookmark-item .bm-delete:hover {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="icon">🪨</span>
+      <h1>Geodude Bookmarks</h1>
+    </header>
+
+    <p id="empty-msg">No bookmarks for this page yet.</p>
+    <div id="bookmark-list"></div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
