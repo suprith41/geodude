@@ -72,7 +72,7 @@ function injectButtons() {
 
     const btn = document.createElement("button");
     btn.className = "geodude-bookmark-btn";
-    btn.textContent = "🪨 Mark";
+    btn.textContent = "🪨";
 
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -176,6 +176,14 @@ async function renderSidebar() {
   });
 
   // ── Action buttons ─────────────────────────────────────────────────────────
+  // Card click → scroll (action buttons stop propagation so they don't double-fire)
+  sidebar.querySelectorAll(".geodude-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      const bm = list[parseInt(item.dataset.index)];
+      scrollToElement(bm.elementId);
+    });
+  });
+
   sidebar.querySelectorAll(".geodude-go").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
