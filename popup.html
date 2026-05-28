@@ -12,42 +12,55 @@
       }
 
       body {
-        width: 320px;
-        min-height: 120px;
+        width: 340px;
+        min-height: 160px;
+        background: #0f0f0f;
+        color: white;
         font-family: system-ui, -apple-system, sans-serif;
-        background: #ffffff;
-        padding: 16px;
-        color: #1a1a2e;
       }
+
+      /* ── Header ─────────────────────────────────────────────────── */
 
       header {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 16px;
-        padding-bottom: 12px;
-        border-bottom: 2px solid #f3f0ff;
-      }
-
-      header .icon {
-        font-size: 22px;
-        line-height: 1;
+        background: linear-gradient(135deg, #6c47ff, #a855f7);
+        padding: 14px 16px 12px;
       }
 
       header h1 {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 700;
-        color: #6c47ff;
         letter-spacing: -0.01em;
       }
 
-      #empty-msg {
-        color: #999;
-        font-size: 13px;
-        text-align: center;
-        padding: 16px 0 8px;
-        line-height: 1.5;
+      #page-label {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-top: 3px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
+
+      /* ── Body ───────────────────────────────────────────────────── */
+
+      #main-body {
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      /* ── Empty state ─────────────────────────────────────────────── */
+
+      #empty-msg {
+        display: none;
+        text-align: center;
+        color: #555;
+        font-size: 13px;
+        padding: 24px 16px;
+      }
+
+      /* ── Bookmark cards ──────────────────────────────────────────── */
 
       #bookmark-list {
         display: flex;
@@ -55,65 +68,117 @@
         gap: 8px;
       }
 
-      .bookmark-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 12px;
-        background: #f3f0ff;
-        border-radius: 8px;
+      .bm-card {
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 12px;
+        padding: 11px 12px;
         cursor: pointer;
-        transition: background 0.15s;
-        border: none;
-        width: 100%;
-        text-align: left;
+        transition: border-color 0.2s, background 0.2s;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
       }
 
-      .bookmark-item:hover {
-        background: #e0d7ff;
+      .bm-card:hover {
+        border-color: #6c47ff;
+        background: #1e1a2e;
       }
 
-      .bookmark-item .bm-icon {
-        font-size: 15px;
-        flex-shrink: 0;
-      }
-
-      .bookmark-item .bm-name {
+      .bm-card-body {
         flex: 1;
+        min-width: 0;
+      }
+
+      .bm-name {
         font-size: 13px;
-        font-weight: 500;
-        color: #1a1a2e;
+        font-weight: 600;
+        color: #e0d7ff;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
 
-      .bookmark-item .bm-delete {
+      .bm-note {
+        font-size: 11px;
+        color: #777;
+        font-style: italic;
+        margin-top: 3px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .bm-timestamp {
+        font-size: 10px;
+        color: #444;
+        margin-top: 4px;
+      }
+
+      .bm-delete {
         flex-shrink: 0;
         background: transparent;
         border: none;
-        cursor: pointer;
+        color: #444;
         font-size: 14px;
-        opacity: 0.45;
-        padding: 2px;
-        border-radius: 4px;
-        transition: opacity 0.15s;
+        cursor: pointer;
+        padding: 2px 4px;
+        border-radius: 6px;
         line-height: 1;
+        transition: color 0.15s, background 0.15s;
       }
 
-      .bookmark-item .bm-delete:hover {
-        opacity: 1;
+      .bm-delete:hover {
+        color: white;
+        background: #6c47ff;
+      }
+
+      /* ── Export bar ──────────────────────────────────────────────── */
+
+      #export-bar {
+        display: none;
+        padding: 10px 12px;
+        border-top: 1px solid #1e1e1e;
+        gap: 8px;
+      }
+
+      #export-bar.visible {
+        display: flex;
+      }
+
+      .export-btn {
+        flex: 1;
+        padding: 8px;
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 8px;
+        color: #aaa;
+        font-size: 12px;
+        cursor: pointer;
+        transition: border-color 0.2s, color 0.2s;
+      }
+
+      .export-btn:hover {
+        border-color: #6c47ff;
+        color: white;
       }
     </style>
   </head>
   <body>
     <header>
-      <span class="icon">🪨</span>
-      <h1>Geodude Bookmarks</h1>
+      <h1>🪨 Geodude Bookmarks</h1>
+      <div id="page-label">Loading…</div>
     </header>
 
-    <p id="empty-msg">No bookmarks for this page yet.</p>
-    <div id="bookmark-list"></div>
+    <div id="main-body">
+      <div id="empty-msg">No bookmarks on this page yet.</div>
+      <div id="bookmark-list"></div>
+    </div>
+
+    <div id="export-bar">
+      <button class="export-btn" id="export-json">⬇ Export JSON</button>
+      <button class="export-btn" id="export-copy">📋 Copy All</button>
+    </div>
 
     <script src="popup.js"></script>
   </body>
