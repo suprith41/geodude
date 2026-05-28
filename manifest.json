@@ -10,11 +10,11 @@
     "scripting"
   ],
   "host_permissions": [
-    "https://claude.ai/*"
+    "<all_urls>"
   ],
   "content_scripts": [
     {
-      "matches": ["https://claude.ai/*"],
+      "matches": ["<all_urls>"],
       "js": ["content.js"],
       "css": ["content.css"],
       "run_at": "document_idle"
